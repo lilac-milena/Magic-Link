@@ -38,10 +38,10 @@ Link: https://go.muna.uk/eXw8n
 In this section, you will get a Mongodb url, please save it and we will use it in the next section.
 
 Open https://account.mongodb.com/account/register and register an account
-<img width="914" alt="image" src="https://object.muna.uk/imgs/posts/vercel-shortUrl/213992084-84a13904-06c1-458f-a662-543999bf8698. png">
-<img width="914" alt="image" src="https://object.muna.uk/imgs/posts/vercel-shortUrl/213992242-673cec96-9f27-414e-ba04-929614ac9213. png">
-<img width="914" alt="image" src="https://object.muna.uk/imgs/posts/vercel-shortUrl/213992292-b2e4df09-3b99-4197-9be7-a6642f784805. png"> png">
-<img width="909" alt="image" src="https://object.muna.uk/imgs/posts/vercel-shortUrl/213992322-038f8ea1-cf12-4595-9a22-4cd2fd8be36a. png"> png">
+<img width="914" alt="image" src="https://object.muna.uk/imgs/posts/vercel-shortUrl/213992084-84a13904-06c1-458f-a662-543999bf8698.png">
+<img width="914" alt="image" src="https://object.muna.uk/imgs/posts/vercel-shortUrl/213992242-673cec96-9f27-414e-ba04-929614ac9213.png">
+<img width="914" alt="image" src="https://object.muna.uk/imgs/posts/vercel-shortUrl/213992292-b2e4df09-3b99-4197-9be7-a6642f784805.png"> png">
+<img width="909" alt="image" src="https://object.muna.uk/imgs/posts/vercel-shortUrl/213992322-038f8ea1-cf12-4595-9a22-4cd2fd8be36a.png"> png">
 
 Create database account and record account password
 
