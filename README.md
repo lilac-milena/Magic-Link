@@ -7,7 +7,7 @@ You can deploy the project using Vercel, Netlify, or other Serverless services, 
 
 > This document was originally a supporting Chinese document for the old version of ShortUrl, now it has been modified to be used as a document for Magic-Link, and the old version of the Shortlink project will no longer provide updates except for security updates.
 > The database structure of the old version is currently not applicable to the new version of ShortUrl, the conversion tool of the old and new database structure will be available soon.
-Github: [Github](https://github.com/fuingzu/Magic-Link)
+
 
 ## 🎉 Features
 
