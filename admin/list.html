@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Magic Link | List</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+</head>
+
+<body>
+    <nav class="navbar navbar-light navbar-expand-md fixed-top navbar-shrink py-3" id="mainNav">
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><span>Magic Link</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="create.html">Create</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="list.html">List</a></li>
+                </ul><a class="btn btn-primary shadow" role="button" href="javascript:logout()">Logout</a>
+            </div>
+        </div>
+    </nav>
+    <section class="py-5 mt-5">
+        <div class="container py-4 py-xl-5">
+            <div class="text-center mt-5">
+                <h1 class="display-6 fw-bold mb-4">List</h1>
+                <p class="mb-4" style="font-size: 1.6rem;padding-top: 0px;margin-top: -15px;">List of short links</p>
+                <form>
+                    <div class="input-group"><span class="input-group-text">Search</span><input class="form-control" type="text" placeholder='{"key":"word"}' id="search_keywords"><a class="btn btn-primary" role="button" href="javascript:pageCtr('Search')">Search</a></div>
+                </form>
+            </div>
+            <div class="text-center" style="margin-top: 25px;">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>path</th>
+                                <th>to</th>
+                                <th>creater</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyIm">
+                            <!-- <tr>
+                                <td>Cell 1</td>
+                                <td>Cell 2</td>
+                                <td>Cell 2</td>
+                                <td>Cell 2</td>
+                                <td><a href="#" style="font-size: 17px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-trash" style="margin-right: 3px;margin-top: -5px;color: var(--bs-red);">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <line x1="4" y1="7" x2="20" y2="7"></line>
+                                            <line x1="10" y1="11" x2="10" y2="17"></line>
+                                            <line x1="14" y1="11" x2="14" y2="17"></line>
+                                            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+                                            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+                                        </svg></a><a href="#" style="font-size: 17px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-copy" style="margin-top: -5px;">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+                                            <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+                                        </svg></a></td>
+                            </tr> -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="btn-group" role="group"></div>
+                <!-- <div class="input-group"><button class="btn btn-primary" role="button" href="">Up</button><span class="input-group-text">1/10</span><button class="btn btn-primary" role="button" href="">Down</button><input class="form-control" type="text"><button class="btn btn-primary" type="button">Jump</button></div> -->
+                <div class="input-group"><a class="btn btn-primary" role="button" href="javascript:pageCtr('Up')">Up</a><span class="input-group-text"><span id="this_page_num"></span>/<span id="total_page_num"></span></span><a class="btn btn-primary" role="button" href="javascript:pageCtr('Down')">Down</a><input class="form-control" type="text" id="Jump_num_input"><a class="btn btn-primary" role="button" href="javascript:pageCtr('Jump')">Jump</a></div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="text-muted d-flex justify-content-between align-items-center pt-3">
+                <p class="mb-0">Copyright © 2023 <a href="https://go.muna.uk/qhssv">Magic Link</a> by <a href="https://go.muna.uk/UCYcO">芙桜竹</a>.</p>
+        </div>
+    </footer>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/startup-modern.js"></script>
+    <script src="https://object.muna.uk/assets/kura/js/jquery-3.6.2.min.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
+
+<script>
+    // 获取当前域名和协议
+    var url = fullUrl()
+
+    const session = getCookie("session")
+    if (session == null) {
+        logout()
+    }
+
+    let list_this_page = 0
+    let pageCount = 0
+
+    // get session
+    const userSession = getCookie('session');
+
+    // delete
+    function deleteLink(path) {
+        // 确认框
+        if (confirm("删除 "+path+" ?") == true) {
+
+            var settings = {
+                "url": url+"/admin/api/delete?session="+session+"&path=" + path,
+                "method": "GET",
+                "timeout": 0,
+                async: false,
+                error: function (xhr, status, error) {
+                    // 获取状态码
+                    var s = xhr.status;
+                    if (s == 401) {
+                        logout()
+                    } else {
+                        // 获取返回信息
+                        var msg = xhr.responseText;
+                        msg = msg.error
+                        alert(msg)
+                    }
+                }
+            };
+
+            $.ajax(settings).done(function(response) {
+                console.log(response);
+                if (response.status == "OK") {
+                    alert('删除成功')
+                    init_list()
+                } else {
+                    alert('删除失败')
+                }
+            });
+            }
+    }
+
+    function pageCtr(Ctr) {
+        if (Ctr == "Up") {
+            if (list_this_page == 0) {
+                alert('已经是第一页了')
+                init_list()
+                return
+            } else {
+                list_this_page = list_this_page - 1
+                init_list()
+            }
+        } else if (Ctr == "Down") {
+            list_this_page = list_this_page + 1
+            init_list()
+        } else if (Ctr == "Jump") {
+            var Jump_num = document.getElementById('Jump_num_input').value
+            if (Jump_num == "") {
+                alert('请输入跳转页数')
+                return
+            } else {
+                if (Jump_num > 0 && Jump_num <= pageCount) {
+                    list_this_page = Jump_num - 1
+                    init_list()
+                } else {
+                    alert('请输入正确的页数')
+                    return
+                }
+            }
+            
+            init_list()
+        } else if (Ctr == "Search") {
+            var search_keywords = document.getElementById('search_keywords').value
+            init_list(search_keywords)
+        }
+    }
+
+    async function init_list(search) {
+
+        if (search == undefined || search == "") {
+            searchAdd = ""
+        } else {
+            searchAdd = "&other=" + search
+        }
+
+        // http
+        var settings = {
+            "url": url+"/admin/api/getLinkList?session="+session+"&page="+list_this_page+"&pageSize=20"+searchAdd,
+            "method": "GET",
+            "timeout": 0,
+            async: false,
+            error: function (xhr, status, error) {
+                // 获取状态码
+                var s = xhr.status;
+                if (s == 401) {
+                    logout()
+                } else {
+                    // 获取返回信息
+                    var msg = xhr.responseText;
+                    msg = msg.error
+                    alert(msg)
+                }
+            }
+        };
+
+        var list = await $.ajax(settings)
+
+        const this_page_num = document.getElementById('this_page_num')
+        const total_page_num = document.getElementById('total_page_num')
+
+        this_page_num.innerText = list_this_page + 1
+        pageCount = list.pageCount
+        total_page_num.innerText = pageCount
+
+        const tbodyIm = document.getElementById('tbodyIm')
+
+        // 清空
+        tbodyIm.innerHTML = '' 
+
+        for(i=0;i<list.list.length;i=i+1) {
+            var thisTr = list["list"][i]
+
+            var domain = thisTr.domain
+            var path = thisTr.path
+            var to = thisTr.to
+            var creater = thisTr.creater
+
+            var tr = document.createElement('tr')
+
+            // var td1 = document.createElement('td')
+            // td1.innerText = domain
+            // tr.appendChild(td1)
+
+            var td2 = document.createElement('td')
+            td2.innerText = path
+            tr.appendChild(td2)
+
+            var td3 = document.createElement('td')
+            td3.innerText = to
+            tr.appendChild(td3)
+
+            var td4 = document.createElement('td')
+            td4.innerText = creater
+            tr.appendChild(td4)
+
+            var td5 = document.createElement('td')
+            td5.innerHTML = '<a href="javascript:deleteLink(\''+path+'\')" style="font-size: 17px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-trash" style="margin-right: 3px;margin-top: -5px;color: var(--bs-red);">    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>    <line x1="4" y1="7" x2="20" y2="7"></line>    <line x1="10" y1="11" x2="10" y2="17"></line>    <line x1="14" y1="11" x2="14" y2="17"></line>    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path></svg></a><a href="javascript:edit(\''+path+'\')" style="font-size: 17px;"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round"> <path stroke="none" d="M0 0h24v24H0z" fill="none"/> <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /> <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /> <path d="M16 5l3 3" /> </svg></a><a href="javascript:copyLink(\''+url+path+'\')" style="font-size: 17px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-copy" style="margin-top: -5px;">    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>    <rect x="8" y="8" width="12" height="12" rx="2"></rect>    <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path></svg></a></td>'
+            tr.appendChild(td5)
+
+            tbodyIm.appendChild(tr)
+        }
+    }
+    init_list()
+
+    async function edit(path) {
+
+        // 要求输入新的path
+        var newPath = prompt("Edit: "+path+", please type in new url");
+
+
+        var requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+        };
+
+        return new Promise((resolve, reject) => {
+            fetch(url+"/admin/api/edit?session="+session+"&path="+path+"&newPath="+newPath, requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                const data = JSON.parse(result)
+                if (data.status == "OK") {
+                    init_list()
+                    resolve(true)
+                } else {
+                    resolve(false)
+                }
+            })
+            .catch(error => console.log('error', error));
+        })
+    }
+</script>
