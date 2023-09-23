@@ -1,6 +1,6 @@
 ## 🪄 Magic Link
 
-### 该页面的 [简体中文版本](https://blog.muna.uk/archives/shortUrl-vercel.html)
+### 该页面的 [**简体中文版本**](https://blog.muna.uk/archives/shortUrl-vercel.html)
 
 Serverless URL shortening service based on Nodejs and Express.
 You can deploy the project using Vercel, Netlify, or other Serverless services, and for Vercel and Netlify, it's completely free.
