@@ -6,12 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Magic Link | List</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Raleway:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
 </head>
 
 <body>
     <nav class="navbar navbar-light navbar-expand-md fixed-top navbar-shrink py-3" id="mainNav">
-        <div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><span>Magic Link</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><span>Magic
+                    Link</span></a><button data-bs-toggle="collapse" class="navbar-toggler"
+                data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span
+                    class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item"><a class="nav-link" href="create.html">Create</a></li>
@@ -26,7 +30,9 @@
                 <h1 class="display-6 fw-bold mb-4">List</h1>
                 <p class="mb-4" style="font-size: 1.6rem;padding-top: 0px;margin-top: -15px;">List of short links</p>
                 <form>
-                    <div class="input-group"><span class="input-group-text">Search</span><input class="form-control" type="text" placeholder='{"key":"word"}' id="search_keywords"><a class="btn btn-primary" role="button" href="javascript:pageCtr('Search')">Search</a></div>
+                    <div class="input-group"><span class="input-group-text">Search</span><input class="form-control"
+                            type="text" placeholder='{"key":"word"}' id="search_keywords"><a class="btn btn-primary"
+                            role="button" href="javascript:pageCtr('Search')">Search</a></div>
                 </form>
             </div>
             <div class="text-center" style="margin-top: 25px;">
@@ -64,13 +70,19 @@
                 </div>
                 <div class="btn-group" role="group"></div>
                 <!-- <div class="input-group"><button class="btn btn-primary" role="button" href="">Up</button><span class="input-group-text">1/10</span><button class="btn btn-primary" role="button" href="">Down</button><input class="form-control" type="text"><button class="btn btn-primary" type="button">Jump</button></div> -->
-                <div class="input-group"><a class="btn btn-primary" role="button" href="javascript:pageCtr('Up')">Up</a><span class="input-group-text"><span id="this_page_num"></span>/<span id="total_page_num"></span></span><a class="btn btn-primary" role="button" href="javascript:pageCtr('Down')">Down</a><input class="form-control" type="text" id="Jump_num_input"><a class="btn btn-primary" role="button" href="javascript:pageCtr('Jump')">Jump</a></div>
+                <div class="input-group"><a class="btn btn-primary" role="button"
+                        href="javascript:pageCtr('Up')">Up</a><span class="input-group-text"><span
+                            id="this_page_num"></span>/<span id="total_page_num"></span></span><a
+                        class="btn btn-primary" role="button" href="javascript:pageCtr('Down')">Down</a><input
+                        class="form-control" type="text" id="Jump_num_input"><a class="btn btn-primary" role="button"
+                        href="javascript:pageCtr('Jump')">Jump</a></div>
             </div>
         </div>
     </section>
     <footer>
         <div class="text-muted d-flex justify-content-between align-items-center pt-3">
-                <p class="mb-0">Copyright © 2023 <a href="https://go.muna.uk/qhssv">Magic Link</a> by <a href="https://go.muna.uk/UCYcO">芙桜竹</a>.</p>
+            <p class="mb-0">Copyright © 2023 <a href="https://go.muna.uk/qhssv">Magic Link</a> by <a
+                    href="https://go.muna.uk/UCYcO">芙桜竹</a>.</p>
         </div>
     </footer>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
@@ -99,10 +111,10 @@
     // delete
     function deleteLink(path) {
         // 确认框
-        if (confirm("删除 "+path+" ?") == true) {
+        if (confirm("删除 " + path + " ?") == true) {
 
             var settings = {
-                "url": url+"/admin/api/delete?session="+session+"&path=" + path,
+                "url": url + "/admin/api/delete?session=" + session + "&path=" + path,
                 "method": "GET",
                 "timeout": 0,
                 async: false,
@@ -120,7 +132,7 @@
                 }
             };
 
-            $.ajax(settings).done(function(response) {
+            $.ajax(settings).done(function (response) {
                 console.log(response);
                 if (response.status == "OK") {
                     alert('删除成功')
@@ -129,7 +141,7 @@
                     alert('删除失败')
                 }
             });
-            }
+        }
     }
 
     function pageCtr(Ctr) {
@@ -159,7 +171,7 @@
                     return
                 }
             }
-            
+
             init_list()
         } else if (Ctr == "Search") {
             var search_keywords = document.getElementById('search_keywords').value
@@ -177,7 +189,7 @@
 
         // http
         var settings = {
-            "url": url+"/admin/api/getLinkList?session="+session+"&page="+list_this_page+"&pageSize=20"+searchAdd,
+            "url": url + "/admin/api/getLinkList?session=" + session + "&page=" + list_this_page + "&pageSize=20" + searchAdd,
             "method": "GET",
             "timeout": 0,
             async: false,
@@ -207,9 +219,9 @@
         const tbodyIm = document.getElementById('tbodyIm')
 
         // 清空
-        tbodyIm.innerHTML = '' 
+        tbodyIm.innerHTML = ''
 
-        for(i=0;i<list.list.length;i=i+1) {
+        for (i = 0; i < list.list.length; i = i + 1) {
             var thisTr = list["list"][i]
 
             var domain = thisTr.domain
@@ -236,7 +248,7 @@
             tr.appendChild(td4)
 
             var td5 = document.createElement('td')
-            td5.innerHTML = '<a href="javascript:deleteLink(\''+path+'\')" style="font-size: 17px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-trash" style="margin-right: 3px;margin-top: -5px;color: var(--bs-red);">    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>    <line x1="4" y1="7" x2="20" y2="7"></line>    <line x1="10" y1="11" x2="10" y2="17"></line>    <line x1="14" y1="11" x2="14" y2="17"></line>    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path></svg></a><a href="javascript:edit(\''+path+'\')" style="font-size: 17px;"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round"> <path stroke="none" d="M0 0h24v24H0z" fill="none"/> <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /> <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /> <path d="M16 5l3 3" /> </svg></a><a href="javascript:copyLink(\''+url+path+'\')" style="font-size: 17px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-copy" style="margin-top: -5px;">    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>    <rect x="8" y="8" width="12" height="12" rx="2"></rect>    <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path></svg></a></td>'
+            td5.innerHTML = '<a href="javascript:deleteLink(\'' + path + '\')" style="font-size: 17px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-trash" style="margin-right: 3px;margin-top: -5px;color: var(--bs-red);">    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>    <line x1="4" y1="7" x2="20" y2="7"></line>    <line x1="10" y1="11" x2="10" y2="17"></line>    <line x1="14" y1="11" x2="14" y2="17"></line>    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path></svg></a><a href="javascript:edit(\'' + path + '\')" style="font-size: 17px;"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round"> <path stroke="none" d="M0 0h24v24H0z" fill="none"/> <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /> <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /> <path d="M16 5l3 3" /> </svg></a><a href="javascript:copyLink(\'' + url + path + '\')" style="font-size: 17px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-copy" style="margin-top: -5px;">    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>    <rect x="8" y="8" width="12" height="12" rx="2"></rect>    <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path></svg></a></td>'
             tr.appendChild(td5)
 
             tbodyIm.appendChild(tr)
@@ -247,27 +259,27 @@
     async function edit(path) {
 
         // 要求输入新的path
-        var newPath = prompt("Edit: "+path+", please type in new url");
+        var newPath = prompt("Edit: " + path + ", please type in new url");
 
 
         var requestOptions = {
-        method: 'GET',
-        redirect: 'follow'
+            method: 'GET',
+            redirect: 'follow'
         };
 
         return new Promise((resolve, reject) => {
-            fetch(url+"/admin/api/edit?session="+session+"&path="+path+"&newPath="+newPath, requestOptions)
-            .then(response => response.text())
-            .then(result => {
-                const data = JSON.parse(result)
-                if (data.status == "OK") {
-                    init_list()
-                    resolve(true)
-                } else {
-                    resolve(false)
-                }
-            })
-            .catch(error => console.log('error', error));
+            fetch(url + "/admin/api/edit?session=" + session + "&path=" + path + "&newPath=" + newPath, requestOptions)
+                .then(response => response.text())
+                .then(result => {
+                    const data = JSON.parse(result)
+                    if (data.status == "OK") {
+                        init_list()
+                        resolve(true)
+                    } else {
+                        resolve(false)
+                    }
+                })
+                .catch(error => console.log('error', error));
         })
     }
 </script>
