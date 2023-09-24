@@ -2,11 +2,11 @@
   "rewrites": [
     {
       "source": "/admin",
-      "destination": "/admin/index"
+      "destination": "/admin/"
     },
     {
       "source": "/about",
-      "destination": "/about/index"
+      "destination": "/about/"
     },
     {
       "source": "/(.*)",
