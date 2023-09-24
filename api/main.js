@@ -344,7 +344,7 @@ app.get("/admin/api/*", async (req, res) => {
     }
 })
 
-app.get("/*", async (req, res) => {
+app.get("/?", async (req, res) => {
     // 获取请求开始时间戳
     let startTime = new Date().getTime()
 
