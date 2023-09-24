@@ -5,6 +5,10 @@
       "destination": "/admin/index"
     },
     {
+      "source": "/about",
+      "destination": "/about/index"
+    },
+    {
       "source": "/(.*)",
       "destination": "api/main"
     }
