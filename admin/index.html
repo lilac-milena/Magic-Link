@@ -4,27 +4,36 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Magic Link | Login</title>
+    <title>GD Link | Login</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Raleway:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+    <link rel="icon" href="../link.ico">
 </head>
 
 <body>
     <section class="py-4 py-md-5">
         <div class="container py-md-5">
-            <h2 class="display-6 fw-bold mb-5"><span class="underline pb-1"><strong>Magic Link | Login</strong><br></span></h2>
-            <p><a href="https://go.muna.uk/qhssv">Magic Link</a> by <a href="https://go.muna.uk/UCYcO">芙桜竹</a>.</p>
-            <div class="row">
-                <div class="col-md-6 text-center"><img class="img-fluid w-100" src="assets/img/illustrations/login.svg"></div>
+            <h2 class="display-6 fw-bold mb-5"><span class="underline pb-1"><strong>GD Link |
+                        Login</strong><br></span></h2>
+            <p><a href="https://github.com/GeorgeDong32/GDLink">GD Link</a> by <a href="https://github.com/GeorgeDong32">GeorgeDong32</a> based on <a href="https://go.muna.uk/qhssv">Magic Link</a> by <a href="https://go.muna.uk/UCYcO">芙桜竹</a>.</p>
+            <div class="row d-flex">
+                <div class="col-md-6 text-center"><img class="img-fluid w-100" src="assets/img/illustrations/login.svg">
+                </div>
                 <div class="col-md-5 col-xl-4 text-center text-md-start">
                     <form method="post" action="javascript:login()" id="mainForm">
-                        <div class="mb-3"><input class="shadow form-control" type="password" name="password" placeholder="Session/API Token"></div>
-                        <div class="mb-5"><button class="btn btn-primary shadow" type="submit" style="width: 100%;">Log in</button></div>
+                        <div class="mb-3"><input class="shadow form-control" type="password" name="password"
+                                placeholder="Session/API Token"></div>
+                        <div class="mb-5"><button class="btn btn-primary shadow" type="submit" style="width: 100%;">Log
+                                in</button></div>
                     </form>
                 </div>
             </div>
         </div>
     </section>
+    <footer class="text-center">
+        <a href="//beian.miit.gov.cn" target="_blank">粤ICP备2023105219号-1</a>
+    </footer>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/startup-modern.js"></script>
     <script src="https://object.muna.uk/assets/kura/js/jquery-3.6.2.min.js"></script>
@@ -38,15 +47,15 @@
     var url = fullUrl()
     var to = getUrlParam("to")
 
-    const session = getCookie("session") 
-  
-     if (session != null) { 
-         if (to == null) {
-                    window.location.href = "/admin/create.html"
-                } else {
-                    window.location.href = "/admin/" + to
+    const session = getCookie("session")
+
+    if (session != null) {
+        if (to == null) {
+            window.location.href = "/admin/create.html"
+        } else {
+            window.location.href = "/admin/" + to
         }
-     }
+    }
 
     function login() {
         var mainForm = document.getElementById("mainForm");
@@ -58,7 +67,7 @@
         }
 
         var settings = {
-            "url": url+"/admin/api/auth?session="+JSON.stringify({"type":"session","session":password}),
+            "url": url + "/admin/api/auth?session=" + JSON.stringify({ "type": "session", "session": password }),
             "method": "GET",
             "timeout": 0,
             async: false,
@@ -77,10 +86,10 @@
             }
         };
 
-        $.ajax(settings).done(function(response) {
+        $.ajax(settings).done(function (response) {
             console.log(response);
             if (response.status == "OK") {
-                setCookie("session", JSON.stringify({"type":"session","session":password}), 1);
+                setCookie("session", JSON.stringify({ "type": "session", "session": password }), 1);
                 if (to == null) {
                     window.location.href = "/admin/create.html"
                 } else {
