@@ -341,6 +341,10 @@ app.get("/admin/api/*", async (req, res) => {
                     res.status(400).json({"error":"Bad Request"})
                     return
                 } else {
+
+                    const buffTo = Buffer.from(newPath, 'base64');
+                    newPath = buffTo.toString('utf-8')
+
                     await MunakaDatabaseFunctions.editLink(path,newPath)
                     res.status(200).json({"status":"OK"})
                     return
