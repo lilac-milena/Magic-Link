@@ -258,7 +258,7 @@
         };
 
         return new Promise((resolve, reject) => {
-            fetch(url+"/admin/api/edit?session="+session+"&path="+path+"&newPath="+newPath, requestOptions)
+            fetch(url+"/admin/api/edit?session="+session+"&path="+path+"&newPath="+btoa(newPath), requestOptions)
             .then(response => response.text())
             .then(result => {
                 const data = JSON.parse(result)
