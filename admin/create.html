@@ -26,8 +26,8 @@
                 <h1 class="display-6 fw-bold mb-4">Create</h1>
                 <p class="mb-4" style="font-size: 1.6rem;padding-top: 0px;margin-top: -15px;">Shorten your link now</p>
                 <form>
-                    <div class="input-group"><span class="input-group-text" style="width: 76px;">Path</span><input class="form-control" type="text" placeholder="Available empty" id="path_input"></div>
-                    <div class="input-group"><span class="input-group-text" style="width: 76px;">URL</span><input class="form-control" type="text" placeholder="Long URL" id="longUrl_input"><a class="btn btn-primary" role="button" href="javascript:Shorten()">Shorten it</a></div>
+                    <div class="input-group"><span class="input-group-text" style="width: 76px;">Path</span><input class="form-control" type="text" placeholder="Optional" id="path_input"></div>
+                    <div class="input-group"><span class="input-group-text" style="width: 76px;">URL</span><input class="form-control" type="text" placeholder="http(s)://" id="longUrl_input"><a class="btn btn-primary" role="button" href="javascript:Shorten()">Shorten it</a></div>
                 </form>
             </div>
             <div class="text-center" style="margin-top: 25px;"><code class="text-center" style="font-size: 18px;" id="shortUrlShower"></code><a href="javascript:copyUrl()"><svg id="copyIcon" style="display:none" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-copy">
@@ -37,11 +37,10 @@
                     </svg></a></div>
         </div>
     </section>
-    <footer>
-        <div class="text-muted d-flex justify-content-between align-items-center pt-3">
-                <p class="mb-0">Copyright © 2023 <a href="https://go.muna.uk/qhssv">Magic Link</a> by <a href="https://go.muna.uk/UCYcO">芙桜竹</a>.</p>
-        </div>
-    </footer>
+    <footer> 
+         <p style="text-align: center; padding-bottom: 0.5rem" class="mb-0">Copyright © 2023 <a href="https://go.muna.uk/qhssv">Magic Link</a> by <a href="https://go.muna.uk/UCYcO">芙桜竹</a> 
+         </p> 
+     </footer>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/startup-modern.js"></script>
     <script src="https://object.muna.uk/assets/kura/js/jquery-3.6.2.min.js"></script>
@@ -80,7 +79,7 @@
                 } else {
                     // 获取返回信息
                     var msg = xhr.responseText;
-                    msg = msg.error
+                    msg = JSON.parse(msg).error
                     alert(msg)
                 }
             }
@@ -103,6 +102,12 @@
 
     function Shorten() {
         var to = $('#longUrl_input').val()
+
+        if (to == '') {
+            alert("Long link can't be empty.")
+            return;
+        }
+
         var path = $('#path_input').val()
         if (path == '') {
             path = undefined
