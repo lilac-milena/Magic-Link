@@ -271,17 +271,23 @@ app.get("/admin/api/*", async (req, res) => {
     } else {
         switch (apiPath) {
             case "/admin/api/create":
-                if (to == undefined) {
-                    res.status(400).json({"error":"Bad Request"})
+
+                if (path != undefined) {
+                        const buffPath = Buffer.from(path, 'base64');
+                    path = buffPath.toString('utf-8')
+                }
+
+
+                // 使用正则匹配 path，仅允许字母数字连字符及下横线和斜杠
+                
+                const pattern = /^[a-zA-Z0-9_\-/.]*$/;
+
+                if (to == undefined || pattern.test(path) == false) {
+                    res.status(400).json({"error":"The path or url format is illegal. The custom path only allows English letters(a-z,A,Z), Arabic numerals(0-9), slashes(/), hyphens(-), dots(.) and underscores(_)."})
                     return
                 } else {
                     const buffTo = Buffer.from(to, 'base64');
                     to = buffTo.toString('utf-8');
-
-                    if (path != undefined) {
-                        const buffPath = Buffer.from(path, 'base64');
-                        path = buffPath.toString('utf-8')
-                    }
 
                     var result = await MunakaDatabaseFunctions.createLink(authResult.username, path, to)
                     if (result == false) {
