@@ -69,9 +69,8 @@
         </div>
     </section>
     <footer>
-        <div class="text-muted d-flex justify-content-between align-items-center pt-3">
-                <p class="mb-0">Copyright © 2023 <a href="https://go.muna.uk/qhssv">Magic Link</a> by <a href="https://go.muna.uk/UCYcO">芙桜竹</a>.</p>
-        </div>
+        <p style="text-align: center; padding-bottom: 0.5rem" class="mb-0">Copyright © 2023 <a href="https://go.muna.uk/qhssv">Magic Link</a> by <a href="https://go.muna.uk/UCYcO">芙桜竹</a>
+        </p>
     </footer>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/startup-modern.js"></script>
@@ -248,7 +247,10 @@
 
         // 要求输入新的path
         var newPath = prompt("Edit: "+path+", please type in new url");
-
+        
+        if (newPath == null) {
+            return;
+        }
 
         var requestOptions = {
         method: 'GET',
