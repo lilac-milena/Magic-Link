@@ -28,7 +28,7 @@ class MunakaDatabaseFunctionsClass {
             let collection = database.collection(mongodbCollection)
             let result = await collection.find({ path: path }).toArray()
 
-            if (enableCache == true && path != "/_test") {
+            if (enableCache == true) {
                 cache[path] = result // 将结果存入缓存
             }
 
