@@ -63,11 +63,11 @@
         if (path == undefined) {
             pathAdd = ''
         } else {
-            pathAdd = '&path=' + path
+            pathAdd = '&path=' + btoa(path)
         }
 
         var settings = {
-            "url": url+"/admin/api/create?session="+session+"&to="+to+pathAdd,
+            "url": url+"/admin/api/create?session="+session+"&to="+btoa(to)+pathAdd,
             "method": "GET",
             "timeout": 0,
             async: false,
