@@ -275,6 +275,14 @@ app.get("/admin/api/*", async (req, res) => {
                     res.status(400).json({"error":"Bad Request"})
                     return
                 } else {
+                    const buffTo = Buffer.from(to, 'base64');
+                    to = buffTo.toString('utf-8');
+
+                    if (path != undefined) {
+                        const buffPath = Buffer.from(path, 'base64');
+                        path = buffPath.toString('utf-8')
+                    }
+
                     var result = await MunakaDatabaseFunctions.createLink(authResult.username, path, to)
                     if (result == false) {
                         res.status(500).json({"error":"Internal Server Error"})
