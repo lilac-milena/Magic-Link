@@ -1,4 +1,4 @@
-## 🪄 Magic Link
+## ✨ Magic Link
 
 ### 该页面的 [**简体中文版本**](https://blog.muna.uk/archives/shortUrl-vercel.html)
 
