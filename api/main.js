@@ -5,14 +5,15 @@
 
 const express = require('express');
 const { MongoClient } = require('mongodb');
-const request = require('request');
+const request = require('request');
+
 
 // 从环境变量中获取配置
 const mongodbUrl = process.env.mongodbUrl || undefined // 获取环境变量
 const AdminSession = process.env.AdminSession || undefined // 获取环境变量
 const linkLen = process.env.linkLen || 10 // 如未指定链接长度则默认为10
-const {mongodbDB} = process.env || 'Muaca' // 如未指定数据库则默认为 Muaca
-const {mongodbCollection} = process.env || 'Links' // 如未指定集合则默认为 Links
+const mongodbDB = process.env.mongodbDB || 'Muaca' // 如未指定数据库则默认为 Muaca
+const mongodbCollection = process.env.mongodbCollection || 'Links' // 如未指定集合则默认为 Links
 
 
 let database = null // 数据库 Client
@@ -148,7 +149,8 @@ class MunakaDatabaseFunctionsClass {
 }
 
 
-const MunakaDatabaseFunctions = new MunakaDatabaseFunctionsClass()
+const MunakaDatabaseFunctions = new MunakaDatabaseFunctionsClass()
+
 
 
 function randomString(len) {
@@ -259,7 +261,8 @@ app.get("/admin/api/*", async (req, res) => {
             case "/admin/api/Oauth":
                 var type = req.query.type
                 var code = req.query.code
-                switch (type) {
+                switch (type) {
+
                     default:
                         res.status(400).json({"error":"Unknown type"})
                         return
@@ -377,11 +380,13 @@ app.get("/*", async (req, res) => {
         let endTime = new Date().getTime()
         let costTime = endTime - startTime
         console.log("Cost "+costTime+"ms")
-
+
+
 
         res.header("Content-Type", "text/html; charset=utf-8"); // 响应类型
         res.status(404).send('Not found.')
-    } else {
+    } else {
+
 
         // 获取请求结束时间戳
         let endTime = new Date().getTime()
