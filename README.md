@@ -78,7 +78,7 @@ Replace "< password >" in the URL with the password you just set.
 
 > You need to click the button below to go to the Vercel deployment page
 
-[![Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/fuingzu/Magic-Link/)
+[![Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/lilac-milena/Magic-Link/)
 
 If you have not logged in or registered with Vercel, please follow the page to register/log in and then click the Deploy button above again.
 
