@@ -1,7 +1,7 @@
 // This code comes from the open source project Magic Link
 // https://github.com/lilac-milena/Magic-Link
 // Licensed via MPL-2.0 license
-// const customUrl = ""
+const customUrl = ""
 
 // copy
 function copyLink(text) {
