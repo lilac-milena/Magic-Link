@@ -1,22 +1,7 @@
-// get cookie
-function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie != '') {
-        var cookies = document.cookie.split(';');
-
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = jQuery.trim(cookies[i]);
-
-            if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-
-                break;
-            }
-        }
-    }
-
-    return cookieValue;
-}
+// This code comes from the open source project Magic Link
+// https://github.com/lilac-milena/Magic-Link
+// Licensed via MPL-2.0 license
+// const customUrl = ""
 
 // copy
 function copyLink(text) {
@@ -27,7 +12,7 @@ function copyLink(text) {
     input.select();
     if (document.execCommand('copy')) {
         document.execCommand('copy');
-        alert('Successful');
+        alert('Copied: '+ text);
     }
     document.body.removeChild(input);
 }
@@ -41,20 +26,6 @@ function fullUrl() {
     return url
 }
 
-// setCookie
-function setCookie(name, value, days) {
-    var expires = '';
-
-    if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-
-        expires = '; expires=' + date.toUTCString();
-    }
-
-    document.cookie = name + '=' + (value || '') + expires + '; path=/admin/';
-}
-
 // logout
 function logout(path) {
 
@@ -62,10 +33,10 @@ function logout(path) {
         path = '';
     }
 
-    // delete cookie
-    setCookie('session', '', -1);
+   localStorage.removeItem("session")
+
     // redirect
-    window.location.href = fullUrl() + '/admin/?to='+path;
+    window.location.href = '/admin/?to='+path;
 }
 
 // get url param
@@ -79,4 +50,99 @@ function getUrlParam(name) {
     }
 
     return null;
+}
+
+// Magic Link
+function ml_getCustomUrl() {
+    return customUrl;
+}
+
+function ml_sessionLogin(password) {
+    return new Promise((resolve, reject) => {
+        var settings = {
+            "url": customUrl+"/admin/api/auth?session="+JSON.stringify({"type":"session","session":password}),
+            "method": "GET",
+            "timeout": 0,
+            async: false,
+            error: function (xhr, status, error) {
+                // 获取状态码
+                var s = xhr.status;
+                if (s == 401) {
+                    // 未登录
+                    // alert('Login failed')
+                    resolve({"status":false})
+                } else {
+                    // 获取返回信息
+                    var msg = xhr.responseText;
+                    msg = msg.error
+                    resolve({"status":false, msg:msg})
+                }
+            }
+        };
+
+        $.ajax(settings).done(function(response) {
+            // console.log(response);
+            if (response.status == "OK") {
+                resolve({"status":true, response})
+            } else {
+                resolve({"status":false})
+            }
+        });  
+    })
+}
+
+function ml_convert(to, path, session) {
+    if (to == undefined || to == "") {
+        return({"status":false, "msg":"URL can't be empty"})
+    }
+
+    if (path[0] != "/" && path != "") {
+        path = "/" + path
+    }
+
+    var requestAdd = ""
+    if(path != "") {
+        requestAdd = "&path="+btoa(path)
+    }
+
+    if (to.startsWith("http://") == false && to.startsWith("https://") == false && to.startsWith("mailto:") == false && to.startsWith("ftp://") == false) {
+        to = "https://" + to
+    }
+
+    return new Promise((resolve, reject) => {
+        var settings = {
+            "url": customUrl+"/admin/api/create?session="+session+"&to="+btoa(to)+requestAdd,
+            "method": "GET",
+            "timeout": 0,
+            async: false,
+            error: function (xhr, status, error) {
+                // 获取状态码
+                var s = xhr.status;
+                if (s == 401) {
+                    resolve({"status":false,"msg":"401"})
+                } else {
+                    resolve({"status":false, "msg":xhr.responseJSON.error})
+                }
+            }
+        };
+
+        $.ajax(settings).done(function(response) {
+            console.log(response);
+            if (response.error == undefined) {
+                var furl = ""
+                if (customUrl == "" || customUrl == undefined) {
+                    furl = fullUrl()
+                } else {
+                    furl = customUrl
+                }
+                resolve({"status":true,"url": furl + response.path, "to": to})
+            } else {
+                resolve({"status":false,"msg":response.error})
+            }
+        });
+    })
+}
+
+function ml_list() {
+
 }

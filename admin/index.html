@@ -1,6 +1,8 @@
+<!-- This code comes from the open source project Magic Link
+https://github.com/lilac-milena/Magic-Link
+Licensed via MPL-2.0 license -->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -8,27 +10,49 @@
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
 </head>
-
 <body>
     <section class="py-4 py-md-5">
         <div class="container py-md-5">
-            <h2 class="display-6 fw-bold mb-5"><span class="underline pb-1"><strong>Magic Link | Login</strong><br></span></h2>
-            <p><a href="https://go.muna.uk/qhssv">Magic Link</a> by <a href="https://go.muna.uk/UCYcO">芙桜竹</a>.</p>
+            <h2 class="display-6 fw-bold mb-5"><span class="pb-1"><strong>Magic Link | Login</strong><br></span></h2>
             <div class="row">
-                <div class="col-md-6 text-center"><img class="img-fluid w-100" src="assets/img/illustrations/login.svg"></div>
+                <div class="col-md-6 text-center"><img class="img-fluid w-80" src="assets/img/login.svg"></div>
+                <!-- assets/img/login.svg copyright: https://delesign.com/free-designs/graphics/illustration/support-team -->
                 <div class="col-md-5 col-xl-4 text-center text-md-start">
-                    <form method="post" action="javascript:login()" id="mainForm">
-                        <div class="mb-3"><input class="shadow form-control" type="password" name="password" placeholder="Session/API Token"></div>
-                        <div class="mb-5"><button class="btn btn-primary shadow" type="submit" style="width: 100%;">Log in</button></div>
-                    </form>
+                    <div style="margin-top: 5rem; "></div>
+
+                    <!--                     
+                    For developers: 
+                        The MagicLink project has reserved a button location for developers to access third-party authentication services. If necessary, the lm_third element can be manually displayed and the button adapted.
+                        Element description:
+                            lm_normal -> Normal (Session) Login
+                            lm_third -> Third-party login (hidden by default)
+                        Thank you for choosing Magic Link!
+                    Magic Link Developer: Lilac Milena 
+                    -->
+
+                    <div id="lm_normal" style="display: block;">
+                        <hr style="margin-top: 6rem;">
+                        <p align="center" style="font-size: small; margin-top: -40px; opacity: 0.65; margin-bottom: 1.5rem;">Normal login</p>
+                        <form method="post" action="javascript:login()" id="mainForm" style="margin-bottom: -2rem;">
+                            <div class="mb-3"><input class="shadow form-control" type="password" name="password" placeholder="User Session"></div>
+                            <div class="mb-5"><button class="btn btn-primary shadow" type="submit" style="width: 100%;" id="oLoginBtn">Log in</button></div>
+                        </form>
+                    </div>
+
+                    <div id="lm_third" style="display: none;">
+                        <hr style="margin-top: 6rem;">
+                        <p align="center" style="font-size: small; margin-top: -40px; opacity: 0.65; margin-bottom: 1.5rem;">Third-party login methods</p>
+                        <div class="mb-5"><button class="btn btn-primary shadow" type="submit" style="width: 100%; background-color: rgb(128, 168, 168); --bs-btn-border-color: rgb(128, 168, 168)">Example Login Method</button></div>
+                    </div>
+
+                    <p style="padding-top: 2rem; opacity: 0.65;"><a href="https://go.muna.uk/qhssv" target="_blank">Magic Link</a> by <a href="https://go.muna.uk/UCYcO" target="_blank">Lilac Milena</a>.<br>Licensed via MPL-2.0 license</p>
                 </div>
             </div>
         </div>
     </section>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/startup-modern.js"></script>
-    <script src="https://object.muna.uk/assets/kura/js/jquery-3.6.2.min.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="/admin/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/admin/assets/js/main.js"></script>
 </body>
 
 </html>
@@ -38,58 +62,41 @@
     var url = fullUrl()
     var to = getUrlParam("to")
 
-    const session = getCookie("session") 
+    const session = localStorage.getItem("session") 
   
-     if (session != null) { 
-         if (to == null) {
-                    window.location.href = "/admin/create.html"
-                } else {
-                    window.location.href = "/admin/" + to
+    function jump() {
+        if (to == null) {
+            window.location.href = "/admin/create.html"
+        } else {
+            window.location.href = "/admin/" + to
         }
-     }
-
-    function login() {
-        var mainForm = document.getElementById("mainForm");
-        var password = mainForm.elements["password"].value;
-
-        if (password == "") {
-            alert("Please enter your password/API Token/MuPass Key");
-            return false;
-        }
-
-        var settings = {
-            "url": url+"/admin/api/auth?session="+JSON.stringify({"type":"session","session":password}),
-            "method": "GET",
-            "timeout": 0,
-            async: false,
-            error: function (xhr, status, error) {
-                // 获取状态码
-                var s = xhr.status;
-                if (s == 401) {
-                    // 未登录
-                    alert('Login failed')
-                } else {
-                    // 获取返回信息
-                    var msg = xhr.responseText;
-                    msg = msg.error
-                    alert(msg)
-                }
-            }
-        };
-
-        $.ajax(settings).done(function(response) {
-            console.log(response);
-            if (response.status == "OK") {
-                setCookie("session", JSON.stringify({"type":"session","session":password}), 1);
-                if (to == null) {
-                    window.location.href = "/admin/create.html"
-                } else {
-                    window.location.href = "/admin/" + to
-                }
-            } else {
-                alert('Login failed')
-            }
-        });
     }
+
+    async function login() {
+        var password = mainForm.elements["password"].value;
+        var oLoginBtn = document.getElementById("oLoginBtn")
+
+        oLoginBtn.disabled = true
+        var res = await ml_sessionLogin(password)
+        if (res.status) {
+            localStorage.setItem("session",password)
+            jump()
+        } else {
+            alert("Authentication failed, please check whether your login credentials are correct.")
+        }
+        oLoginBtn.disabled = false
+    }
+
+    async function main() {
+        if (session != null) { 
+            var res = await ml_sessionLogin(session)
+            if (res.status) {
+                jump()
+            } else {
+                localStorage.removeItem("session")
+            }
+        }
+    }
+    main()
 
 </script>
