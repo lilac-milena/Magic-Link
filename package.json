@@ -1,8 +1,8 @@
 {
-  "name": "shortlink",
+  "name": "magiclink",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "api/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
