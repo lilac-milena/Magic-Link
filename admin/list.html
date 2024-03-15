@@ -66,10 +66,11 @@ Licensed via MPL-2.0 license -->
         // The following code needs to be rewritten and optimized
 
         var url = fullUrl()
+        let auth = undefined
         try {
-            const auth = JSON.parse(localStorage.getItem("auth"))
+            auth = JSON.parse(localStorage.getItem("auth"))
         } catch {
-            const auth = null
+            auth = null
         }
         if (auth == null) {
             logout()

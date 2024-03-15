@@ -49,10 +49,11 @@ Licensed via MPL-2.0 license -->
     <script src="/admin/assets/js/main.js"></script>
 
     <script>
+        let auth = undefined
         try {
-            const auth = JSON.parse(localStorage.getItem("auth"))
+            auth = JSON.parse(localStorage.getItem("auth"))
         } catch {
-            const auth = null
+            auth = null
         }
 
         async function main() {

@@ -67,10 +67,11 @@ Licensed via MPL-2.0 license -->
     var url = fullUrl()
     var to = getUrlParam("to")
 
+    let auth = undefined
     try {
-        const auth = JSON.parse(localStorage.getItem("auth"))
+        auth = JSON.parse(localStorage.getItem("auth"))
     } catch {
-        const auth = null
+        auth = null
     }
   
     function jump() {
@@ -86,7 +87,7 @@ Licensed via MPL-2.0 license -->
         var oLoginBtn = document.getElementById("oLoginBtn")
 
         oLoginBtn.disabled = true
-        var res = await ml_sessionLogin(password)
+        var res = await ml_sessionLogin({"type":"session","session":password})
         if (res.status) {
             localStorage.setItem("auth",JSON.stringify({"type":"session","session":password}))
             jump()
