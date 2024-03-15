@@ -18,8 +18,9 @@ You can deploy the project using Vercel, Netlify, or other Serverless services, 
   - Short URL List
   - Delete Short URLs
   - Customize URL
+- Fast access to third-party authentication systems
 - API
-- Can be used for secondary development
+  - Can be used for secondary development
 - Database Cache
 
 
