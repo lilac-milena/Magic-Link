@@ -49,11 +49,15 @@ Licensed via MPL-2.0 license -->
     <script src="/admin/assets/js/main.js"></script>
 
     <script>
-        const session = localStorage.getItem("session")
+        try {
+            const auth = JSON.parse(localStorage.getItem("auth"))
+        } catch {
+            const auth = null
+        }
 
         async function main() {
-            if (session != null) {
-                var res = await ml_sessionLogin(session)
+            if (auth != null) {
+                var res = await ml_sessionLogin(auth)
                 if (res.status == false) {
                     logout()
                 }
@@ -68,7 +72,7 @@ Licensed via MPL-2.0 license -->
             var to = $('#longUrl_input').val()
             var path = $('#path_input').val()
 
-            var res = await ml_convert(to, path, JSON.stringify({"type":"session","session":session}))
+            var res = await ml_convert(to, path, auth)
             if (res.status) {
                 console.log(res)
                 $('#urlShower').text(res.url)

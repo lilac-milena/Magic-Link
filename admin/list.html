@@ -66,11 +66,15 @@ Licensed via MPL-2.0 license -->
         // The following code needs to be rewritten and optimized
 
         var url = fullUrl()
-        let session = localStorage.getItem("session")
-        if (session == null) {
+        try {
+            const auth = JSON.parse(localStorage.getItem("auth"))
+        } catch {
+            const auth = null
+        }
+        if (auth == null) {
             logout()
         }
-        session = JSON.stringify({"type":"session","session":session})
+
         let furl = ""
         if (customUrl == "" || customUrl == undefined) {
             furl = fullUrl()
@@ -87,9 +91,13 @@ Licensed via MPL-2.0 license -->
             if (confirm(path+" => "+to +"\nConfirm to delete?") == true) {
 
                 var settings = {
-                    "url": customUrl+"/admin/api/delete?session="+session+"&path=" + path,
+                    "url": customUrl+"/admin/api/delete?path=" + path,
                     "method": "GET",
                     "timeout": 0,
+                    "headers": {
+                        "type": auth.type,
+                        "session": auth.session
+                    },
                     async: false,
                     error: function (xhr, status, error) {
                         // 获取状态码
@@ -165,9 +173,13 @@ Licensed via MPL-2.0 license -->
 
             // http
             var settings = {
-                "url": customUrl+"/admin/api/getLinkList?session="+session+"&page="+list_this_page+"&pageSize=20"+searchAdd,
+                "url": customUrl+"/admin/api/getLinkList?page="+list_this_page+"&pageSize=20"+searchAdd,
                 "method": "GET",
                 "timeout": 0,
+                "headers": {
+                    "type": auth.type,
+                    "session": auth.session
+                },
                 async: false,
                 error: function (xhr, status, error) {
                     // 获取状态码
@@ -241,13 +253,18 @@ Licensed via MPL-2.0 license -->
                 return;
             }
 
+            const myHeaders = new Headers();
+            myHeaders.append("type", auth.type);
+            myHeaders.append("session", auth.session);
+
             var requestOptions = {
             method: 'GET',
+            headers: myHeaders,
             redirect: 'follow'
             };
 
             return new Promise((resolve, reject) => {
-                fetch(customUrl+"/admin/api/edit?session="+session+"&path="+path+"&newPath="+btoa(newPath), requestOptions)
+                fetch(customUrl+"/admin/api/edit?path="+path+"&newPath="+btoa(newPath), requestOptions)
                 .then(response => response.text())
                 .then(result => {
                     const data = JSON.parse(result)

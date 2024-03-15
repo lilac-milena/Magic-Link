@@ -1,5 +1,5 @@
-// 芙桜竹 2023
-// Github fuingzu
+// 芙桜竹 2024
+// Github lilac-milena
 // Website muna.uk
 // LastUpdate: V4.28-P ITAP7
 
@@ -110,7 +110,6 @@ class MunakaDatabaseFunctionsClass {
         return true
     }
     async auth(session) { // 如需修改权限验证方式请修改此函数
-        var session = JSON.parse(session)
         switch (session.type) {
             case "session":
                 if (session.session == AdminSession) {
@@ -245,7 +244,10 @@ app.all('*', function (req, res, next) {
 app.get("/admin/api/*", async (req, res) => {
     let path = req.query.path
     let to = req.query.to
-    let session = req.query.session
+    let session = {
+        type: req.headers.type,
+        session: req.headers.session
+    }
 
     let apiPath = req.path
 

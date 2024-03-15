@@ -57,12 +57,16 @@ function ml_getCustomUrl() {
     return customUrl;
 }
 
-function ml_sessionLogin(password) {
+function ml_sessionLogin(auth) {
     return new Promise((resolve, reject) => {
         var settings = {
-            "url": customUrl+"/admin/api/auth?session="+JSON.stringify({"type":"session","session":password}),
+            "url": customUrl+"/admin/api/auth",
             "method": "GET",
             "timeout": 0,
+            "headers": {
+                "type": auth.type,
+                "session": auth.session
+            },
             async: false,
             error: function (xhr, status, error) {
                 // 获取状态码
@@ -91,7 +95,7 @@ function ml_sessionLogin(password) {
     })
 }
 
-function ml_convert(to, path, session) {
+function ml_convert(to, path, auth) {
     if (to == undefined || to == "") {
         return({"status":false, "msg":"URL can't be empty"})
     }
@@ -111,9 +115,13 @@ function ml_convert(to, path, session) {
 
     return new Promise((resolve, reject) => {
         var settings = {
-            "url": customUrl+"/admin/api/create?session="+session+"&to="+btoa(to)+requestAdd,
+            "url": customUrl+"/admin/api/create?to="+btoa(to)+requestAdd,
             "method": "GET",
             "timeout": 0,
+            "headers": {
+                "type": auth.type,
+                "session": auth.session
+            },
             async: false,
             error: function (xhr, status, error) {
                 // 获取状态码

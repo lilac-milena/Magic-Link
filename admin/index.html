@@ -67,7 +67,11 @@ Licensed via MPL-2.0 license -->
     var url = fullUrl()
     var to = getUrlParam("to")
 
-    const session = localStorage.getItem("session") 
+    try {
+        const auth = JSON.parse(localStorage.getItem("auth"))
+    } catch {
+        const auth = null
+    }
   
     function jump() {
         if (to == null) {
@@ -84,7 +88,7 @@ Licensed via MPL-2.0 license -->
         oLoginBtn.disabled = true
         var res = await ml_sessionLogin(password)
         if (res.status) {
-            localStorage.setItem("session",password)
+            localStorage.setItem("auth",JSON.stringify({"type":"session","session":password}))
             jump()
         } else {
             alert("Authentication failed, please check whether your login credentials are correct.")
@@ -93,12 +97,12 @@ Licensed via MPL-2.0 license -->
     }
 
     async function main() {
-        if (session != null) { 
-            var res = await ml_sessionLogin(session)
+        if (auth != null) { 
+            var res = await ml_sessionLogin(auth)
             if (res.status) {
                 jump()
             } else {
-                localStorage.removeItem("session")
+                localStorage.removeItem("auth")
             }
         }
     }
