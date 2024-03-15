@@ -33,7 +33,7 @@ function logout(path) {
         path = '';
     }
 
-   localStorage.removeItem("session")
+   localStorage.removeItem("auth")
 
     // redirect
     window.location.href = '/admin/?to='+path;
