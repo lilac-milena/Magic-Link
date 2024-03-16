@@ -30,6 +30,8 @@ Test link: https://go.muna.uk/eXw8n
 
 <img width="1080" alt="login" src="https://github.com/lilac-milena/Magic-Link/assets/143427814/636fd64f-ea89-469f-8948-b3dd0e75670e">
 
+## 📃 API Documentation
+[*API-documentation.md*](API-documentation.md)
 
 ## 😜 Deployment
 
