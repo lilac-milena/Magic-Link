@@ -5,7 +5,6 @@
 
 const express = require('express');
 const { MongoClient } = require('mongodb');
-const request = require('request');
 
 
 // 从环境变量中获取配置
