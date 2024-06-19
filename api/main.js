@@ -232,11 +232,7 @@ init()
 // 数据库结构
 // id created_at creater path to
 
-// 允许跨域
 app.all('*', function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*"); // 允许所有来源访问
-    res.header("Access-Control-Allow-Headers", "X-Requested-With,Content-Type"); // 允许访问的头信息
-    res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS"); // 允许访问的方式
     res.header("Content-Type", "application/json;charset=utf-8"); // 响应类型
     next();
 });
