@@ -2,6 +2,6 @@
   "dependencies": {
     "express": "^4.21.1",
     "express-rate-limit": "^7.4.1",
-    "mongodb": "^6.9.0"
+    "mongodb": "^6.10.0"
   }
 }
