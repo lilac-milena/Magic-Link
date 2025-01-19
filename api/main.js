@@ -196,6 +196,8 @@ async function db_connect() {
 const app = express();
 const port = 3000;
 
+export default app;
+
 // 初始化
 async function init() {
     console.log(
