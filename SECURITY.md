@@ -1,5 +1,8 @@
 # Security Policy
 
+## The npm packages version
+This project uses dependabot to automatically update npm package versions, so it does not accept pull requests for package updates at this time.
+
 ## What versions are provided with security updates?
 The repository has only one release branch, and we (myself and other contributors) will do our best to keep it safe.
 
