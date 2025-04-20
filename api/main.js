@@ -233,7 +233,7 @@ init()
 // 数据库结构
 // id created_at creater path to
 
-app.all('*', function (req, res, next) {
+app.all('*full_req_path', function (req, res, next) {
     res.header("Content-Type", "application/json;charset=utf-8"); // 响应类型
     next();
 });
@@ -246,8 +246,8 @@ const limiter = rateLimit({
 })
 
 // 将速率限制应用至所有 admin api 下
-app.use("/admin/api/*", limiter)
-app.get("/admin/api/*", async (req, res) => {
+app.use("/admin/api/*full_req_path", limiter)
+app.get("/admin/api/*full_req_path", async (req, res) => {
     let path = req.query.path
     let to = req.query.to
     let session = {
@@ -370,7 +370,7 @@ app.get("/admin/api/*", async (req, res) => {
     }
 })
 
-app.get("/*", async (req, res) => {
+app.get("/*full_req_path", async (req, res) => {
     // 获取请求开始时间戳
     let startTime = new Date().getTime()
 
