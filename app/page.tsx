@@ -80,7 +80,7 @@ export default async function HomePage() {
         </div>
 
         <div className="text-center text-gray-500 text-sm mt-8 animate-fade-in" style={{ animationDelay: '0.6s' }}>
-          <p>© 2023 Magic Link. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Magic Link. All rights reserved.</p>
         </div>
       </div>
     </main>
