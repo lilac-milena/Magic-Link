@@ -77,8 +77,7 @@ export default {
     },
     async session({ session, token }) {
       // Add user id to the session
-      // @ts-ignore
-      session.user.id = token.id;
+      (session.user as { id?: string }).id = token.id;
       return session;
     },
   },
