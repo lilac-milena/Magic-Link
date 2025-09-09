@@ -20,10 +20,10 @@ import {
 // HTML编码函数，防止XSS攻击
 function htmlEncode(str: string): string {
     return str
-        .replace(/&/g, '&')
-        .replace(/</g, '<')
-        .replace(/>/g, '>')
-        .replace(/"/g, '"')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
         .replace(/'/g, '&#39;');
 }
 
