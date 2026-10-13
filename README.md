@@ -4,7 +4,7 @@
 
 ---
 
-> 🌐 该页面有 [**简体中文版本**](https://blog.muna.uk/archives/shortUrl-vercel.html)
+> 🌐 该页面有 [**简体中文版本**](https://go.muna.uk/hseHX)
 
 Serverless URL shortening service based on Nodejs and Express.  
 You can deploy the project using Vercel, Netlify, or other Serverless services, and for Vercel and Netlify, it's completely free.
@@ -32,4 +32,4 @@ Test link: https://go.muna.uk/eXw8n
 [*API-documentation.md*](API-documentation.md)
 
 ## 🎄 Deployment
-Please visit https://blog.lilacmilena.com/articles/deploying-a-vercel-based-short-link-service/
+Please visit https://go.muna.uk/hseHX
