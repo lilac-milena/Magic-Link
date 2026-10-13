@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "express": "^5.1.0",
+    "express": "^5.2.1",
     "express-rate-limit": "^8.0.1",
     "mongodb": "^6.18.0"
   }
