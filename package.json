@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "express": "^5.3.0",
-    "express-rate-limit": "^8.0.1",
+    "express-rate-limit": "^8.0.2",
     "mongodb": "^7.0.0"
   }
 }
